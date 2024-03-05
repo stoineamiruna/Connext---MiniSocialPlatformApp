@@ -1,0 +1,82 @@
+@model SocialPlatformApp.Models.Profile
+@{
+    ViewBag.Title = "Edit";
+}
+
+<br />
+<h2>Editare profil</h2>
+<hr />
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var radioButtons = document.getElementsByName('PublicProfile');
+
+            radioButtons.forEach(function (radio) {
+                radio.addEventListener('change', function () {
+                    if (radio.checked) {
+                        console.log('Opțiunea selectată: ', radio.value);
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Profiles",
+                   method: FormMethod.Post,
+                   routeValues: new { id = Model.Id }))
+{
+    <div class="row mb-3">
+        @Html.Label("FirstName", "Prenume")
+        <div class="col-sm-3">
+            @Html.Editor("FirstName", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.Label("LastName", "Nume de familie")
+        <div class="col-sm-3">
+            @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        @Html.Label("Bio", "Bio")
+        <div class="col-sm-5">
+            @Html.Editor("Bio", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Bio, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-1">
+            <b>Profil:</b>
+        </legend>
+        <br />
+        <div>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.PublicProfile, true, new { id = "option1", @class = "form-check-input" })
+                @Html.LabelFor(model => model.PublicProfile, "Public", new { @class = "form-check-label" })
+            </div>
+
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.PublicProfile, false, new { id = "option2", @class = "form-check-input" })
+                @Html.LabelFor(model => model.PublicProfile, "Privat", new { @class = "form-check-label" })
+            </div>
+        </div>
+        <br />
+        <br />
+    </fieldset>
+
+
+    <br />
+
+
+    <span style="color: white;">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><button class="btn btn-success" type="submit">Modifică profil</button>
+
+
+}

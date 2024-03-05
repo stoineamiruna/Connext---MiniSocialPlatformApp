@@ -1,0 +1,55 @@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Profiluri</h2>
+<br />
+
+@if (TempData["message"] != null)
+{
+    <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+        @ViewBag.Message
+    </div>
+    <br />
+}
+
+<form method="GET" class="mb-4" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; border: 1px solid #ced4da;">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control"
+               placeholder="Search topics or keywords" name="search"
+               value="@ViewBag.SearchString">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+</form>
+
+@foreach (var profil in ViewBag.Profiles)
+{
+    <div class="card">
+
+        <div class="card-body">
+
+            <h3 class="card-title alert-success py-3 px-3 rounded-2">@profil.FirstName @profil.LastName</h3>
+
+            <div class="d-flex justify-content-between flex-row mt-5">
+                <div class="card-text sirbutoane"> Username: <i class="bi bi-person"></i> <i>@profil.User.UserName</i> </div>
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-success sirbutoane " href="/Profiles/Show/@profil.Id">Afișare profil</a>
+                    @if (profil.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin)
+                    {
+                        <a class="btn btn-danger custom-btn sirbutoane " href="/Profiles/Delete/@profil.Id">Șterge profil</a>
+                        <a class="btn btn-secondary btn-secondary" href="/Profiles/Edit/@profil.Id">Editare profil</a>
+                    }
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <br />
+    <br />
+}
+

@@ -1,0 +1,41 @@
+@model SocialPlatformApp.Models.Group
+@{
+    ViewBag.Title = "New";
+}
+
+<br />
+<h2>Creare grup</h2>
+<hr />
+<br />
+
+
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Groups", method: FormMethod.Post))
+{
+    <div class="row mb-3">
+        @Html.Label("Name", "Nume grup")
+        <div class="col-sm-3">
+            @Html.TextBox("Name", null, new { @class = "form-control" })
+            @Html.ValidationMessage("Name", null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+
+    <div class="row mb-3">
+        @Html.Label("Description", "Descriere grup")
+        <div class="col-sm-5">
+            @Html.TextArea("Description", null, new { @class = "form-control" })
+            @Html.ValidationMessage("Description", null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+
+
+    <br /><br />
+
+    <span style="color: white;">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><button class="btn btn-success" type="submit">Creează grupul</button>
+
+}
+
+
+

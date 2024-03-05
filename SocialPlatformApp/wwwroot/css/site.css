@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+.titan-one-regular {
+    font-family: "Titan One", sans-serif;
+    font-weight: 400;
+    font-size: 100px;
+}
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.custom-btn {
+    margin-right: 10px;
+}
+
+.alert {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.sirbutoane {
+    margin-right: 29px;
+    margin-buttom: 7px;
+}
+
+.card-title {
+    background-color: #D5D6EA;
+    color: #EC4AFD;
+}
+
+.alert-success {
+    background-color: #D5D6EA;
+    color: #676f8f;
+}
+
+    .alert-success::after hover {
+        background-color: #D5D6EA;
+    }
+
+.btn-success {
+    background-color: #8FBC8F;
+    border: 1px solid #85ab85;
+}
+
+    .btn-success:hover {
+        background-color: #739173;
+    }
+
+.btn-outline-success {
+    color: #4E9258;
+}
+
+    .btn-outline-success:hover {
+        background-color: #4E9258;
+    }
+
+.btn-danger {
+    background-color: #C24641;
+    border: 1px solid #C24641;
+}
+
+.navbar {
+    background-color: #e1e2f5 !important;
+    border: none !important;
+    box-shadow: 0 1px 6px #bebfd1 !important;
+    color: #B4CFEC;
+}
+
+a.nav-link {
+    color: #7E81B3 !important;
+}
+
+    a.nav-link:hover {
+        color: #7E587E !important;
+    }
+
+.logoutbtn {
+    color: #2c2c2c !important;
+}
+
+    .logoutbtn:hover {
+        color: #00b894 !important;
+    }
+
+.note-editor .dropdown-toggle::after {
+    display: none;
+}
+
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.font-logo {
+    font-family: 'Titan One';
+    color: #967BB6;
+}
+
+    .font-logo:hover {
+        color: #B09FCA !important;
+    }
+
+.footer-position {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0 3px 12px #636e72;
+}
+
+
+.formpost {
+    background-color: #F0F8FF;
+}

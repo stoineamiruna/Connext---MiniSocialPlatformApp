@@ -1,0 +1,41 @@
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Adăugare postare</h2>
+<br />
+<br />
+
+<div class="card">
+
+    <form method="post" action="/Posts/New">
+
+        <div class="card-body">
+
+            <div class="row">
+                <label>Descriere</label>
+                <textarea class="form-control" name="Description"></textarea>
+            </div>
+
+            <br />
+            <div >
+                <label>Adaugă conținut media</label>
+                <select name="MediaType">
+                    <option value="Text">Text</option>
+                    <option value="Image">Imagine</option>
+                    <option value="Video">Videoclip</option>
+                </select>
+                <label>Adaugă o sursă</label>
+
+                <input type="text" name="Media" />
+
+            </div>
+            <br /><br />
+
+            <button class="btn btn-success" type="submit">Creează postarea</button>
+
+        </div>
+
+    </form>
+
+</div>

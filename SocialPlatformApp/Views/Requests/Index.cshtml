@@ -1,0 +1,53 @@
+@{
+    ViewBag.Title = "Cereri de urmarire";
+}
+<br />
+<h2>@ViewBag.Title</h2>
+<br />
+@if (TempData["message"] != null)
+{
+    <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+        @ViewBag.Message
+    </div>
+}
+<br />
+
+@if (ViewBag.Count == 0)
+{
+    <div class="card">
+        <p class="text-center">Nu ai nicio cerere de urmărire</p>
+        <br /> <br />
+        <a class="btn btn-success d-flex justify-content-center" href="/Profiles/Index">Caută conexiuni</a>
+    </div>
+}
+else
+{
+    <p class="text-center">Ai @ViewBag.Count cereri de prietenie</p>
+    <br /> <br />
+    <a class="btn btn-success d-flex justify-content-center" href="/Profiles/Index">Caută conexiuni</a>
+    <br /> <br />
+    @foreach (var item in ViewBag.RequestsWithSender)
+    {
+
+        if (item.Request.Status == "Neacceptata")
+        {
+            <div class="card d-flex justify-content-between align-items-center">
+                <p class="mt-2 text-left">@item.SenderFirstName @item.SenderLastName dorește să te urmărească</p>
+                <div class="d-flex">
+                    <form method="post" action="/Requests/Accept" class="mr-2">
+                        <input type="hidden" name="Id" value="@item.Request.Id" />
+                        <button class="btn btn-success sirbutoane" type="submit">Acceptă</button>
+                    </form>
+                    <br /> <br />
+                    <form method="post" action="/Requests/Delete">
+                        <input type="hidden" name="Id" value="@item.Request.Id" />
+                        <button class="btn btn-danger sirbutoane" type="submit">Șterge</button>
+                    </form>
+                </div>
+            </div>
+
+            <br />
+            <br />
+        }
+    }
+}

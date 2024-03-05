@@ -1,0 +1,109 @@
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<h2 class="text-center">Feed</h2>
+
+
+@if (TempData["message"] != null)
+{
+    <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+        @ViewBag.Message
+    </div>
+}
+
+@if (ViewBag.AreProfil==true)
+{
+    <br />
+    <br />
+    <!-- Formular adaugare postare -->
+    <div class="card formpost">
+
+
+        <form method="post" action="/Posts/New">
+
+            <div class="card-body">
+                <h4>Adaugă o postare nouă</h4>
+                <br />
+
+                <div class="row">
+                    <label>Descriere</label>
+                    <textarea class="form-control" name="Description"></textarea>
+                </div>
+
+                <br />
+                <div>
+                    <label>Adaugă conținut media</label>
+                    <select name="MediaType">
+                        <option value="Text">Text</option>
+                        <option value="Image">Imagine</option>
+                        <option value="Video">Videoclip</option>
+                    </select>
+                    <label>Adaugă o sursă</label>
+
+                    <input type="text" name="Media" />
+
+                </div>
+                <br /><br />
+
+                <button class="btn btn-success" type="submit">Creează postarea</button>
+
+            </div>
+
+        </form>
+
+    </div>
+}
+<br />
+<hr />
+@foreach (var item in ViewBag.PostsWithAutor)
+    if (item.Post.GroupId == null && ( item.profil_public==true || ViewBag.EsteAdmin == true || item.Post.UserId == ViewBag.UserCurent || (item.cerere_trimisa != null && item.cerere_trimisa.Status == "Acceptata")))
+{
+    <div class="card ">
+
+        <div class="card-body">
+
+            <a href="/Profiles/Show/@item.AutorId" style="text-decoration: none;">
+                <h3 class="card-title alert-success py-3 px-3 rounded-2">@item.AutorFirstName @item.AutorLastName</h3>
+            </a>
+            <div class="card-text">@item.Post.Description</div>
+            <br /> <br />
+            @if (@item.Post.MediaType == "Image")
+            {
+                    <img src="@item.Post.Media" alt="Imagine înglobată" width="560" style="display:block; margin:auto;">
+            }
+            else if (@item.Post.MediaType == "Video")
+            {
+                    <iframe src="@item.Post.Media" width="560" height="315" allowfullscreen style="display:block; margin:auto;"></iframe>
+            }
+            else if (@item.Post.MediaType == "Text")
+            {
+                    <div class="card-text">@item.Post.Media</div>
+            }
+
+            <div class="d-flex justify-content-between flex-row mt-5">
+
+
+                 <span class="alert-success px-1 align-content-center">@item.Post.Date</span>
+
+                    <div class="d-flex flex-row justify-content-end">
+                        <a class="btn btn-success sirbutoane" href="/Posts/Show/@item.Post.Id">Afișează postare</a>
+                        @if (@item.Post.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin)
+                        {
+                            <a class="btn btn-secondary sirbutoane" href="/Posts/Edit/@item.Post.Id">Editează postare</a>
+                            <a class="btn btn-danger sirbutoane" href="/Posts/Delete/@item.Post.Id">Șterge postare</a>
+                        }
+                    </div>
+
+                </div>
+
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+
+}
+</div>

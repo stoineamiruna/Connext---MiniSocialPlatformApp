@@ -1,0 +1,133 @@
+<div class="container">
+    <div class="d-flex justify-content-start flex-row mt-10">
+
+        @if(ViewBag.Post.GroupId==null)
+        {
+            <a class="btn btn-outline-success" href="/Posts/Index/">
+                <i class="bi bi-arrow-return-left"></i> Înapoi la postări
+            </a>
+        }
+        else
+        {
+            <a class="btn btn-outline-success" href="/Groups/Show/@ViewBag.Post.GroupId/">
+                <i class="bi bi-arrow-return-left"></i> Înapoi la postări
+            </a>
+        }
+
+
+        <div class="ms-auto">
+            <i class="bi bi-person"></i> <i>@ViewBag.Post.User.UserName</i>
+        </div>
+
+    </div>
+    @if (TempData["message"] != null)
+    {
+        <br />
+        <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+            @ViewBag.Message
+        </div>
+    }
+    <br />
+    <br />
+    <div class="row">
+
+        <div>
+
+            <div class="card">
+                <!-- Partea de postare -->
+                <div class="card-body">
+
+                    <a href="/Profiles/Show/@ViewBag.Profile.Id" style="text-decoration: none;">
+                        <h3 class="card-title alert-success py-3 px-3 rounded-2">@ViewBag.Profile.FirstName @ViewBag.Profile.LastName</h3>
+                    </a>
+
+                    <div class="card-text">@ViewBag.Post.Description</div>
+                    <br /><br />
+
+                    @if (@ViewBag.Post.MediaType == "Image")
+                    {
+                        <img src="@ViewBag.Post.Media" alt="Imagine înglobată" width="560" style="display:block; margin:auto;">
+                    }
+                    else if (@ViewBag.Post.MediaType == "Video")
+                    {
+                        <iframe width="560" height="315" src="@ViewBag.Post.Media" allowfullscreen width="560" height="315" style="display:block; margin:auto;"></iframe>
+                    }
+                    else if (@ViewBag.Post.MediaType == "Text")
+                    {
+                        <div class="card-text">@ViewBag.Post.Media</div>
+                    }
+
+                    <div class="d-flex flex-row mt-5" style="margin-bottom:0">
+                        <span class="alert-success">@ViewBag.Post.Date</span>
+                    </div>
+                    <div class="d-flex flex-row justify-content-end">
+                        @if (@ViewBag.Post.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin)
+                        {
+                            <a class="btn btn-success sirbutoane" href="/Posts/Edit/@ViewBag.Post.Id">Editează postare</a>
+                            <a class="btn btn-danger sirbutoane" href="/Posts/Delete/@ViewBag.Post.Id">Șterge postare</a>
+                        }
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <br />
+            <br />
+
+            <div class="card">
+                <!-- Comentarii -->
+                @foreach (var comm in ViewBag.PostsWithComments)
+                {
+                    <div>
+                        <div class="card-body">
+                            <a style="text-decoration: none;">
+                                <h6 >@comm.AutorFirstName @comm.AutorLastName</h6>
+                            </a>
+                            <div>
+                                <p>@comm.Comment.Content</p>
+
+                            </div>
+
+                            <div class="d-flex">
+
+                                <small class="alert-success px-1" style="margin-top: auto">@comm.Comment.Date</small>
+                                @if (@comm.Comment.UserId == ViewBag.UserCurent || ViewBag.EsteAdmin)
+                                {
+                                    <div class="d-flex" style="margin-left: auto;">
+                                        <div>
+                                            <a class="btn btn-outline-primary" href="/Comments/Edit/@comm.Comment.Id"><i class="bi bi-pencil-square"></i>Editează</a>
+                                        </div>
+                                        <div>
+                                            <form method="post" action="/Comments/Delete/@comm.Comment.Id">
+                                                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash"></i>Șterge</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Formular adaugare comentariu -->
+            <div class="card mt-3">
+                <form method="post" action="/Comments/New">
+                    <div class="card-body">
+                        <input type="hidden" name="PostId" value="@ViewBag.Post.Id" />
+                        <label>Conținut comentariu</label>
+                        <br />
+                        <textarea class="form-control" name="Content"></textarea>
+                        <br />
+                        <button class="btn btn-success" type="submit">Adaugă comentariul</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
+</div>

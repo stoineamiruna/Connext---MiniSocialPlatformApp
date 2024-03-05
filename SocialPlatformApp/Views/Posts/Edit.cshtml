@@ -1,0 +1,41 @@
+@model SocialPlatformApp.Models.Post
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editare postare</h2>
+<br />
+
+<form method="post" action="/Posts/Edit/@ViewBag.Post.Id">
+
+    <div class="card-body">
+
+        <div class="row">
+            <label>Descriere</label>
+            @Html.Editor("Description", new { htmlAttributes = new { @class = "form-control" } })
+            @*<textarea class="form-control" name="Description"></textarea>*@
+        </div>
+
+        <br />
+        <div>
+            <label>Adaugă conținut media</label>
+            <select name="MediaType">
+                <option value="Text">Text</option>
+                <option value="Image">Imagine</option>
+                <option value="Video">Videoclip</option>
+            </select>
+            <label>Adaugă o sursă</label>
+
+            @*<input type="text" name="Media" />*@
+            @Html.Editor("Media", new { htmlAttributes = new { @class = "form-control" } })
+
+        </div>
+        <br /><br />
+
+        <button class="btn btn-success" type="submit">Salvează modificarile</button>
+
+    </div>
+
+</form>
+
+

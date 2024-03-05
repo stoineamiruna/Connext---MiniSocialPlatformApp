@@ -1,0 +1,127 @@
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+
+
+<h2 class="text-center">Grupuri la care te poți alătura <i class="bi bi-people-fill"></i></h2>
+<br />
+
+@if (TempData["message"] != null)
+{
+    <div class="alert p-3 rounded-3 text-center mb-5 @ViewBag.Alert">
+        @ViewBag.Message
+    </div>
+}
+
+<br />
+@if (User.Identity.IsAuthenticated && ViewBag.AreProfil == true)
+{
+    <div class="d-flex justify-content-center">
+        <br />
+        <a class="btn btn-outline-success" href="/Groups/New">Creează grupul tau</a>
+        <br />
+
+    </div>
+
+    <br />
+}
+else if (User.Identity.IsAuthenticated && ViewBag.AreProfil == false)
+{
+    <div class="d-flex justify-content-center">
+        <br />
+        <a class="btn btn-success" href="/Profiles/New">Creează grupul tau</a>
+        <br />
+
+    </div>
+
+    <br />
+}
+
+
+@foreach (var group in ViewBag.Groups)
+{
+    ViewBag.Alaturat = false;
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title alert-success py-3 px-3 rounded-2">@group.Name</h3>
+            <div class="card-text">@group.Description</div>
+
+            <div class="d-flex justify-content-between flex-row mt-5">
+                <div> Creat de <i class="bi bi-person"></i> <i>@group.User.UserName</i></div>
+
+                @if (User.Identity.IsAuthenticated && ViewBag.AreProfil == true)
+                {
+                    @if (group.UserId != ViewBag.UserCurent)
+                    {
+                        @foreach (var usergroup in ViewBag.UserGroups)
+                        {
+                            @if (usergroup.GroupId == group.Id && usergroup.UserId == ViewBag.UserCurent)
+                            {
+                                @if (ViewBag.EsteAdmin)
+                                {
+                                    <span style="color: white;">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span> <a class="btn btn-success btn-secondary" href="/Groups/Show/@group.Id">Afișează grup</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-success btn-secondary" href="/Groups/Show/@group.Id">Afișează grup</a>
+                                }
+                                ViewBag.Alaturat = true;
+                                break;
+                            }
+                        }
+                        @if (ViewBag.Alaturat == false)
+                        {
+                            @if (ViewBag.EsteAdmin)
+                            {
+                                <span style="color: white;">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+
+                                <a class="btn btn-success btn-secondary" href="/Groups/JoinGroup?groupId=@group.Id">Alătură-te</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success btn-secondary" href="/Groups/JoinGroup?groupId=@group.Id">Alătură-te</a>
+                            }
+
+
+                        }
+
+                    }
+                }
+                else if (User.Identity.IsAuthenticated && ViewBag.AreProfil == false)
+                {
+                    <a class="btn btn-success" href="/Profiles/New">Alătură-te</a>
+                }
+                else
+                {
+                    <a class="btn btn-success" href="/Identity/Account/Login">Alătură-te</a>
+                }
+                @if (@group.UserId == ViewBag.UserCurent)
+                {
+                    <div class="text-end">
+                        <a class="btn btn-success btn-secondary" href="/Groups/Show/@group.Id">Afișează grup</a>
+                        <a class="btn btn-secondary btn-secondary" href="/Groups/Edit/@group.Id">Editare grup</a>
+                        <a class="btn btn-danger btn-secondary" href="/Groups/Delete/@group.Id">Șterge grup</a>
+                    </div>
+                }
+
+                else if (ViewBag.EsteAdmin)
+                {
+                    <div class="text-end">
+                        <a class="btn btn-secondary btn-secondary" href="/Groups/Edit/@group.Id">Editare grup</a>
+                        <a class="btn btn-danger btn-secondary" href="/Groups/Delete/@group.Id">Șterge grup</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+}
+
+
+
+
