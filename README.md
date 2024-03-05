@@ -1,6 +1,6 @@
 # MicroSocialPlatform - Connext
 
-Connext este o platformă care promovează interacțiunea în timp real printr-un mediu social dinamic. Pentru atingerea acestui obiectiv, echipa noastră a adoptat o abordare agilă, concentrându-se pe metodologia Scrum. Proiectul a fost structurat în sprinturi săptămânale, unde prioritățile și cerințele au fost stabilite la începutul fiecărui sprint, asigurându-ne astfel flexibilitate în fața schimbărilor.
+Connext este o platformă care promovează interacțiunea în timp real printr-un mediu social dinamic. Această platformă oferă utilizatorilor posibilitatea de a crea profiluri, de a se conecta cu alți utilizatori, de a posta și partaja conținut. Connext oferă o experiență simplificată și focalizată pe interacțiunea socială, facilitând legături și comunicare între membrii săi.Pentru atingerea acestui obiectiv, echipa noastră a adoptat o abordare agilă, concentrându-se pe metodologia Scrum. Proiectul a fost structurat în sprinturi săptămânale, unde prioritățile și cerințele au fost stabilite la începutul fiecărui sprint, asigurându-ne astfel flexibilitate în fața schimbărilor.
 
 Planificarea fiecărei etape de implementare s-a realizat cu ajutorul aplicației Trello, prin intermediul căreia, la începutul fiecărui sprint, am discutat și prioritizat pașii următori care trebuie realizați, împărțind în mod echilibrat task-urile, astfel încât fiecare membru al echipei să realizeze atât partea de backend, cât și de frontend și să treacă prin aceleași capitole din cadrul materiei Dezvoltarea aplicațiilor web.
 
